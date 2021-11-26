@@ -1,0 +1,23 @@
+look at c source
+strcmp is used and some manipulation is done [Do we need to understand manipulation?]
+
+disassemble main
+we see: 
+<+76>:	call   0x1080 <puts@plt>		Think what this puts maybe doing.
+<+163>:	jle    0x121b <main+114>		Why is this jump here?
+<+179>:	call   0x10a0 <strcmp@plt>		<-- Point of attraction
+<+200>:	call   0x1080 <puts@plt>
+<+214>:	call   0x1080 <puts@plt>
+
+Stop before strcmp call and show that it is comparing strings. Can deduce kind of manipulation done on s1 (shift every character n-ascii steps where n is its index in string. For example AAAAAAA --> ABCDEFG)
+
+lets put breakpoint just before strcmp
+> My dummy key: AAAAAAA
+continue execution, break point hits:
+ ► 0x55555555525c <main+179>    call   strcmp@plt <strcmp@plt>
+        s1: 0x7fffffffdcb8 ◂— 0x47464544434241 /* 'ABCDEFG' */
+        s2: 0x7fffffffdcc0 ◂— 0x7b6d67646d6a50 /* 'Pjmdgm{' */
+
+! addresses are different before run and after run !
+
+Correct key: Pikachu

@@ -1,0 +1,40 @@
+Show objdump:
+objdump -d todo3 -M intel
+
+0000000000001149 <main>:
+    1149:       f3 0f 1e fa             endbr64 
+    114d:       55                      push   rbp
+    114e:       48 89 e5                mov    rbp,rsp
+    1151:       48 83 ec 10             sub    rsp,0x10
+    1155:       89 7d fc                mov    DWORD PTR [rbp-0x4],edi
+    1158:       48 89 75 f0             mov    QWORD PTR [rbp-0x10],rsi
+    115c:       48 8d 3d a1 0e 00 00    lea    rdi,[rip+0xea1]        # 2004 <_IO_stdin_used+0x4>
+    1163:       b8 00 00 00 00          mov    eax,0x0
+    1168:       e8 e3 fe ff ff          call   1050 <printf@plt>
+    116d:       b8 00 00 00 00          mov    eax,0x0
+    1172:       c9                      leave  
+    1173:       c3                      ret    
+
+0000000000001174 <fun>:
+    1174:       f3 0f 1e fa             endbr64 
+    1178:       55                      push   rbp
+    1179:       48 89 e5                mov    rbp,rsp
+    117c:       48 8d 3d 8d 0e 00 00    lea    rdi,[rip+0xe8d]        # 2010 <_IO_stdin_used+0x10>
+    1183:       b8 00 00 00 00          mov    eax,0x0
+    1188:       e8 c3 fe ff ff          call   1050 <printf@plt>
+    118d:       b8 00 00 00 00          mov    eax,0x0
+    1192:       5d                      pop    rbp
+    1193:       c3                      ret    
+    1194:       66 2e 0f 1f 84 00 00    nop    WORD PTR cs:[rax+rax*1+0x0]
+    119b:       00 00 00 
+    119e:       66 90                   xchg   ax,ax
+
+
+In gdb:
+info functions
+disassemble main
+disassemble fun
+
+Change Instruction pointer to beginning of fun()
+Use: set $rip = 0x0000.....
+continue execution
