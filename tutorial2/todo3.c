@@ -1,3 +1,5 @@
+// gcc todo3.c -Wall -O0 -o todo3
+
 #include <stdio.h>
 #include <string.h>
 
