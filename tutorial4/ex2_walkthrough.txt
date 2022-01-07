@@ -1,0 +1,14 @@
+Client side persistent XSS. Using local storage.
+
+File in use: 	cat_loader_ex2.html
+		cat_viewer_ex2.html
+
+Show local storage using dev tools: Application>Local Storage
+		
+cat_viewer_ex2 uses local storage to view cats present on system. Our user is not having an cats and eluded to illegal website cat_loader_ex2
+
+cat loader can do two things:
+1. benign action: to load simple cat name
+2. malicious action: to load alert box trigger as cat name (currently commented)
+
+Show usages of both payloads from cat loader, and how alert box can be triggered in second case. Even after we exit our browser, content in local storage is persistent. So whenever user visits cat viewer with malicious local storage they are attacked.

